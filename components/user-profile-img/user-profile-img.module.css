@@ -1,0 +1,13 @@
+.imageWrapper {
+  position: relative;
+  align-self: center;
+  width: 10rem;
+  height: 10rem;
+  clip-path: border-box;
+  border-radius: 999px;
+  margin-top: 5rem;
+}
+
+.image {
+  object-fit: cover;
+}

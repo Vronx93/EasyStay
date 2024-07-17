@@ -1,0 +1,8 @@
+.image {
+  position: relative !important;
+}
+
+.swiper {
+  width: 100%;
+  height: fit-content;
+}

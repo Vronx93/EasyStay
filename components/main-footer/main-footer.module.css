@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: var(--neutral-color);
+}
+
+.footer {
+  height: 200px;
+  width: 100%;
+  max-width: var(--max-width);
+  background: var(--neutral-color);
+}

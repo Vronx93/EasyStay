@@ -1,0 +1,23 @@
+.container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  background: var(--neutral-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem var(--body-padding-inline);
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.container p {
+  color: var(--background-color);
+}

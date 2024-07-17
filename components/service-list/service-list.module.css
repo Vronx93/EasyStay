@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding-top: 6rem;
+}
+
+.list {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10rem;
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+}

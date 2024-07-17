@@ -1,0 +1,18 @@
+.container {
+  padding-inline: var(--body-padding-inline);
+  padding-bottom: 5rem;
+}
+
+.container > header {
+  margin-block: 5rem;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
