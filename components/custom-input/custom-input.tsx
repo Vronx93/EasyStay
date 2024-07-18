@@ -5,6 +5,8 @@ interface CustomInputInterface {
   nameAndId: string;
   label: string;
   type: string;
+  errorText?: string;
+  state: string;
   stateSetter: (value: string) => void;
   handleChange: (
     event: ChangeEvent<HTMLInputElement>,
@@ -16,6 +18,8 @@ export default function CustomInput({
   nameAndId,
   label,
   type,
+  errorText,
+  state,
   stateSetter,
   handleChange,
 }: CustomInputInterface) {
@@ -29,10 +33,14 @@ export default function CustomInput({
         id={nameAndId}
         name={nameAndId}
         type={type}
+        value={state}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           handleChange(event, stateSetter)
         }
       />
+      {errorText && errorText?.length > 2 && (
+        <p className={styles.error}>{errorText}</p>
+      )}
     </div>
   );
 }

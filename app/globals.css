@@ -8,6 +8,7 @@
   --cta-color: rgba(249, 105, 14, 1);
   --neutral-color: rgba(8, 14, 44, 1);
   --cta-hover-color: rgb(225, 74, 9, 1);
+  --disabled-color: rgb(135, 123, 115);
 }
 
 *,
@@ -68,7 +69,7 @@ button:active {
 
 button:disabled {
   cursor: not-allowed;
-  background: var(--cta-hover-color);
+  background: var(--disabled-color);
 }
 
 a {

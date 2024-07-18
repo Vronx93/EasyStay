@@ -1,12 +1,13 @@
 .form {
   display: grid;
   align-items: center;
-  gap: 1rem;
+  gap: 2.5rem;
   grid-template-columns: 1fr 1fr;
-  margin-top: 4rem;
+  margin-top: 5rem;
 }
 
 .inputContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -34,4 +35,11 @@
 .btn {
   width: 100%;
   margin-left: 50%;
+}
+
+.error {
+  position: absolute;
+  bottom: -1rem;
+  color: red;
+  font-size: 0.75rem;
 }
