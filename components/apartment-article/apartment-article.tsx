@@ -8,7 +8,6 @@ export default function ApartmentArticle() {
     location: "Cracow, Poland",
     rentPerWeek: 1000,
     avaliability: true,
-    furniture: false,
     hostObject: "Mock Host Object.Name",
   };
 
@@ -31,10 +30,6 @@ export default function ApartmentArticle() {
         <p>
           <span className={styles.bold}>Avaliability: </span>
           {mockApartmentObject.avaliability}
-        </p>
-        <p>
-          <span className={styles.bold}>Furniture: </span>
-          {mockApartmentObject.furniture}
         </p>
         <p>
           <span className={styles.bold}>Host: </span>
