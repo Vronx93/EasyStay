@@ -2,7 +2,7 @@ import ApartmentListElement from "../apartment-list-element/apartment-list-eleme
 import styles from "./apartment-list.module.css";
 import mockImg from "@/public/images/list-apartment-img.jpeg";
 
-export default function ApartmentList() {
+export default function ApartmentList({ editable }: { editable?: boolean }) {
   const mockApartmentList = [
     {
       thumbnailImage: mockImg,
@@ -33,7 +33,7 @@ export default function ApartmentList() {
   return (
     <section className={styles.container}>
       <header>
-        <h2>Search Results</h2>
+        <h2>{editable ? "Your Listings" : "Search Results"}</h2>
       </header>
       <ul className={styles.list}>
         {mockApartmentList.map((apartment) => (
@@ -43,6 +43,7 @@ export default function ApartmentList() {
               title={apartment.title}
               shortDescription={apartment.shortDescription}
               apartmentId={apartment.mockId}
+              editable={editable}
             />
           </li>
         ))}

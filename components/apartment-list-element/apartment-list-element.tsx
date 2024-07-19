@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import styles from "./apartment-list-element.module.css";
 import Link from "next/link";
-import { UUID } from "crypto";
+import deleteImg from "@/public/images/trash.svg";
 
 export interface ApartmentListElementProps {
   thumbnailImage: string | StaticImageData;
@@ -35,9 +35,16 @@ export default function ApartmentListElement({
           <h3 className={styles.title}>{title}</h3>
         </header>
         <p>{shortDescription}</p>
-        <Link className={styles.btn} href={`apartments/${apartmentId}`}>
-          {editable ? <p>Edit</p> : <p>Rent This Apartment</p>}
-        </Link>
+        <div className={styles.cta}>
+          <Link className={styles.btn} href={`apartments/${apartmentId}`}>
+            {editable ? (
+              <p className={styles.rentBtn}>Edit</p>
+            ) : (
+              <p className={styles.rentBtn}>Rent This Apartment</p>
+            )}
+          </Link>
+          {editable && <button className={styles.red}>Delete</button>}
+        </div>
       </article>
     </div>
   );

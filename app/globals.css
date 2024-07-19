@@ -10,6 +10,8 @@
   --neutral-color: rgba(8, 14, 44, 1);
   --cta-hover-color: rgb(225, 74, 9, 1);
   --disabled-color: rgb(135, 123, 115);
+  --red: rgb(224 27 27);
+  --red-hover: rgb(179 13 13);
 }
 
 *,
@@ -58,6 +60,7 @@ button {
   cursor: pointer;
   font-weight: 600;
   transition: 0.3s;
+  font-size: 1rem;
 }
 
 button:hover {

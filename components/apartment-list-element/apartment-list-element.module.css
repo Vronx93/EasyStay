@@ -11,7 +11,7 @@
 .imageWrapper {
   position: relative;
   clip-path: border-box;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 1rem;
   height: 100%;
   width: var(--image-width);
 }
@@ -29,7 +29,7 @@
 .article {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 100%;
   width: calc(100% - var(--image-width));
   padding: 1rem;
@@ -40,6 +40,81 @@
 }
 
 .btn {
-  width: max-content;
   align-self: center;
+  width: 100%;
+}
+
+.red {
+  background-color: var(--red);
+  width: 100%;
+}
+
+.red:hover {
+  background-color: var(--red-hover);
+}
+
+.rentBtn {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  background: var(--cta-color);
+  box-shadow: 0px 0px 2px 0px var(--neutral-color);
+  color: var(--background-color);
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.rentBtn:hover {
+  background: var(--cta-hover-color);
+}
+
+.rentBtn:active {
+  scale: 0.98;
+}
+
+.rentBtn:disabled {
+  cursor: not-allowed;
+  background: var(--disabled-color);
+}
+
+.cta {
+  display: grid;
+  width: 100%;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta * {
+  width: 25rem;
+  max-width: 90vw;
+}
+
+@media screen and (max-width: 999px) {
+  .container {
+    flex-direction: column;
+    /* max-width: 800px; */
+    align-items: center;
+    margin-inline: auto;
+    height: max-content;
+    max-width: 90vw;
+  }
+
+  .article {
+    width: auto;
+    gap: 2rem;
+  }
+
+  .imageWrapper {
+    height: 400px;
+    width: var(--image-width);
+    max-width: 90vw;
+  }
 }
