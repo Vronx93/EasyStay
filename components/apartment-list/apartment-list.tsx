@@ -8,21 +8,25 @@ export default function ApartmentList() {
       thumbnailImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
+      mockId: crypto.randomUUID(),
     },
     {
       thumbnailImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
+      mockId: crypto.randomUUID(),
     },
     {
       thumbnailImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
+      mockId: crypto.randomUUID(),
     },
     {
       thumbnailImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
+      mockId: crypto.randomUUID(),
     },
   ];
 
@@ -38,6 +42,7 @@ export default function ApartmentList() {
               thumbnailImage={apartment.thumbnailImage}
               title={apartment.title}
               shortDescription={apartment.shortDescription}
+              apartmentId={apartment.mockId}
             />
           </li>
         ))}

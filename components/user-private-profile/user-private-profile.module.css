@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+  padding-inline: var(--body-padding-inline);
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.textContentWrapper {
+  display: grid;
+  gap: 2rem;
+  text-align: left;
+  margin-top: 4rem;
+}
+
+.boldSpan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.imageContentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.input {
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--neutral-color);
+  background: var(--background-color);
+  color: var(--neutral-color);
+}
+
+.error {
+  position: absolute;
+  bottom: -1rem;
+  color: red;
+  font-size: 0.75rem;
+}
+
+.btn {
+  max-width: 200px;
+}
+
+.buttonPlaceholder {
+  height: 4rem;
+}
+
+.submit {
+  margin-top: 6rem;
+}

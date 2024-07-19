@@ -1,13 +1,27 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
 .imageWrapper {
   position: relative;
   align-self: center;
-  width: 10rem;
-  height: 10rem;
+  width: var(--user-profile-img-height-width);
+  height: var(--user-profile-img-height-width);
   clip-path: border-box;
   border-radius: 999px;
-  margin-top: 5rem;
 }
 
 .image {
   object-fit: cover;
+}
+
+.deleteImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }

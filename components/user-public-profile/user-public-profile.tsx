@@ -45,6 +45,7 @@ export default function UserPublicProfile({
                 thumbnailImage={apartment.thumbnailImage}
                 title={apartment.title}
                 shortDescription={apartment.shortDescription}
+                apartmentId={apartment.apartmentId}
               />
             </li>
           ))}

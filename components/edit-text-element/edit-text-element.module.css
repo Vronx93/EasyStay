@@ -1,0 +1,29 @@
+.textContentWrapper {
+  display: grid;
+  gap: 1rem;
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.boldSpan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.input {
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--neutral-color);
+  background: var(--background-color);
+  color: var(--neutral-color);
+}
+
+.error {
+  position: absolute;
+  bottom: -1rem;
+  color: red;
+  font-size: 0.75rem;
+}

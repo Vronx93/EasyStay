@@ -1,0 +1,4 @@
+.container {
+  height: var(--user-profile-img-height-width);
+  width: var(--user-profile-img-height-width);
+}

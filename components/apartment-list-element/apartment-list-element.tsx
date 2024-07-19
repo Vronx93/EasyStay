@@ -1,17 +1,22 @@
 import Image, { StaticImageData } from "next/image";
 import styles from "./apartment-list-element.module.css";
 import Link from "next/link";
+import { UUID } from "crypto";
 
 export interface ApartmentListElementProps {
   thumbnailImage: string | StaticImageData;
   title: string;
   shortDescription: string;
+  apartmentId: string;
+  editable?: boolean;
 }
 
 export default function ApartmentListElement({
   thumbnailImage,
   title,
   shortDescription,
+  apartmentId,
+  editable,
 }: ApartmentListElementProps) {
   return (
     <div className={styles.container}>
@@ -30,8 +35,8 @@ export default function ApartmentListElement({
           <h3 className={styles.title}>{title}</h3>
         </header>
         <p>{shortDescription}</p>
-        <Link className={styles.btn} href={`apartments/${title}`}>
-          <p>Rent This Apartment</p>
+        <Link className={styles.btn} href={`apartments/${apartmentId}`}>
+          {editable ? <p>Edit</p> : <p>Rent This Apartment</p>}
         </Link>
       </article>
     </div>
