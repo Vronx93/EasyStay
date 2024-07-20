@@ -7,7 +7,7 @@ export default function Navbar() {
       <NavLink to="/apartments">
         <p>Apartments</p>
       </NavLink>
-      <NavLink to="/add-listing">
+      <NavLink to="/account/user-listings/add-listing">
         <p>Add Listing</p>
       </NavLink>
       <NavLink to="/about">

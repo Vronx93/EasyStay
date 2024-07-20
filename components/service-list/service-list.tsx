@@ -8,7 +8,7 @@ export default function ServiceList() {
   const servicesList = [
     {
       image: listApartment,
-      path: "/list-apartment",
+      path: "/account/user-listings/add-listing",
       text: "List Apartment",
       alt: "Passing keys for an apartment.",
     },

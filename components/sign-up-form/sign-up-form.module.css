@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 90%;
+  max-width: 40rem;
+  margin-top: 10rem;
+  margin-inline: auto;
+}
+
+.container small {
+  text-align: right;
+}

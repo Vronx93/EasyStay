@@ -105,7 +105,7 @@ export default function FilterForm() {
   }, [location, maxWeeklyPrice, startDate, endDate]);
 
   function handleInputChange(
-    event: ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     setter: (value: string) => void
   ) {
     setter(event.target.value);
