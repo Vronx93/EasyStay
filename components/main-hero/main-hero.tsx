@@ -6,8 +6,10 @@ export default function MainHero() {
   return (
     <section className={styles.container}>
       <Image
+        priority
         src={heroImg}
         className={styles.image}
+        quality={85}
         alt={"Happy people with key to their rented apartment."}
         fill
       />

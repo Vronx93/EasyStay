@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+  width: 100%;
+  margin-bottom: calc(var(--main-footer-height) + 5rem);
+  height: 650px;
+}
+
+.image {
+  object-fit: cover;
+}

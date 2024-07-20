@@ -15,6 +15,9 @@ import styles from "./add-listing-form.module.css";
 export default function AddListingForm() {
   return (
     <form className={styles.container}>
+      <header>
+        <h1>Add Listing</h1>
+      </header>
       {/* multiple img input */}
       <ImageInput />
       <CustomInput nameAndId="title" label="Title" />
