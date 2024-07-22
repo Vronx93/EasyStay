@@ -5,25 +5,25 @@ import mockImg from "@/public/images/list-apartment-img.jpeg";
 export default function ApartmentList({ editable }: { editable?: boolean }) {
   const mockApartmentList = [
     {
-      thumbnailImage: mockImg,
+      primaryImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
       mockId: crypto.randomUUID(),
     },
     {
-      thumbnailImage: mockImg,
+      primaryImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
       mockId: crypto.randomUUID(),
     },
     {
-      thumbnailImage: mockImg,
+      primaryImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
       mockId: crypto.randomUUID(),
     },
     {
-      thumbnailImage: mockImg,
+      primaryImage: mockImg,
       title: "Apartment Title",
       shortDescription: "Mock Short Description",
       mockId: crypto.randomUUID(),
@@ -39,7 +39,7 @@ export default function ApartmentList({ editable }: { editable?: boolean }) {
         {mockApartmentList.map((apartment) => (
           <li className={styles.listItem} key={crypto.randomUUID()}>
             <ApartmentListElement
-              thumbnailImage={apartment.thumbnailImage}
+              primaryImage={apartment.primaryImage}
               title={apartment.title}
               shortDescription={apartment.shortDescription}
               apartmentId={apartment.mockId}

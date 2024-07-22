@@ -4,7 +4,7 @@ import Link from "next/link";
 import deleteImg from "@/public/images/trash.svg";
 
 export interface ApartmentListElementProps {
-  thumbnailImage: string | StaticImageData;
+  primaryImage: string | StaticImageData;
   title: string;
   shortDescription: string;
   apartmentId: string;
@@ -12,7 +12,7 @@ export interface ApartmentListElementProps {
 }
 
 export default function ApartmentListElement({
-  thumbnailImage,
+  primaryImage,
   title,
   shortDescription,
   apartmentId,
@@ -23,7 +23,7 @@ export default function ApartmentListElement({
       <div className={styles.imageWrapper}>
         <Image
           className={styles.image}
-          src={thumbnailImage}
+          src={primaryImage}
           fill
           quality={60}
           alt="Apartment thumbnail."

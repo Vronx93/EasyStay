@@ -14,9 +14,10 @@ export default function MainHero() {
         fill
       />
       <div className={styles.text}>
-        <h1>Welcome To EasyStay</h1>
-        <p>Rental Apartment App in Poland</p>
+        <h1>Find Your Perfect Home with EasyStay</h1>
+        <p>Seamless Rentals. Trusted Listings. Easy Living.</p>
       </div>
+      <div className={styles.gradient}></div>
     </section>
   );
 }

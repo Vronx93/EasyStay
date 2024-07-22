@@ -17,3 +17,7 @@
 .btn {
   margin-top: 2rem;
 }
+
+.red {
+  color: var(--red);
+}

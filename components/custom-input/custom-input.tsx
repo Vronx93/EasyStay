@@ -10,11 +10,9 @@ interface CustomInputInterface {
   textarea?: boolean;
   textareaStyles?: string;
   errorText?: string;
-  state: string;
-  stateSetter: (value: string) => void;
+  stateValue: string;
   handleChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    setter: (value: string) => void
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
 
@@ -25,8 +23,7 @@ export default function CustomInput({
   textarea,
   textareaStyles,
   errorText,
-  state,
-  stateSetter,
+  stateValue,
   handleChange,
 }: CustomInputInterface) {
   return (
@@ -39,9 +36,9 @@ export default function CustomInput({
           className={`${styles.input} ${textareaStyles && textareaStyles}`}
           id={nameAndId}
           name={nameAndId}
-          value={state}
+          value={stateValue}
           onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
-            handleChange(event, stateSetter)
+            handleChange(event)
           }
         />
       ) : (
@@ -50,9 +47,9 @@ export default function CustomInput({
           id={nameAndId}
           name={nameAndId}
           type={type}
-          value={state}
+          value={stateValue}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange(event, stateSetter)
+            handleChange(event)
           }
         />
       )}

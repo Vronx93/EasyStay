@@ -1,10 +1,9 @@
 .container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 650px;
+  top: -3px;
+  z-index: -1;
 }
 
 .image {
@@ -13,15 +12,36 @@
 
 .text {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 8%;
+  height: 100%;
   color: var(--background-color);
+  padding-inline: 5%;
+  padding-top: 2.5%;
+  top: 0;
+  left: 0;
 }
 
 .text h1 {
-  font-size: 5rem;
+  font-size: 3.5rem;
+  font-weight: 200;
 }
 
 .text p {
   color: var(--background-color);
   font-size: 2rem;
+}
+
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 6%,
+    rgba(19, 19, 19, 0) 40%
+  );
 }

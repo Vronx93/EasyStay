@@ -9,18 +9,12 @@ import { z } from "zod";
 export default function FilterForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [location, setLocation] = useState<string>(
-    searchParams.get("location") ?? ""
-  );
-  const [maxWeeklyPrice, setMaxWeeklyPrice] = useState<string>(
-    searchParams.get("price") ?? ""
-  );
-  const [startDate, setStartDate] = useState<string>(
-    searchParams.get("startDate") ?? ""
-  );
-  const [endDate, setEndDate] = useState<string>(
-    searchParams.get("startDate") ?? ""
-  );
+  const [formData, setFormData] = useState({
+    location: searchParams.get("location") ?? "",
+    maxWeeklyPrice: searchParams.get("price") ?? "",
+    startDate: searchParams.get("startDate") ?? "",
+    endDate: searchParams.get("startDate") ?? "",
+  });
   const [filtersQuery, setFiltersQuery] = useState<string>("");
   const [filtersArray, setFiltersArray] = useState<
     { key: string; value: string }[]
@@ -31,8 +25,6 @@ export default function FilterForm() {
     startDateError: "",
     endDateError: "",
   });
-
-  console.log("errors", errors);
 
   function validateInput(
     schema: any,
@@ -46,7 +38,6 @@ export default function FilterForm() {
         ...prevErrors,
         [errorName]: isValid.error.errors[0].message,
       }));
-      console.log("after error set", errors);
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, [errorName]: "" }));
       setFiltersArray((prevArray) => {
@@ -61,54 +52,69 @@ export default function FilterForm() {
           return [...prevArray, { key: queryName, value: input as string }];
         }
       });
-      console.log("noError", errors);
     }
   }
 
-  const FormSchema = z.object({
-    location: z
-      .string({ message: "Location should be a string value." })
-      .optional(),
-  });
-
   useEffect(() => {
-    if (location) {
+    if (formData.location[0]) {
       const locationSchema = z
         .string({ message: "Location should be a string value." })
         .min(2)
         .max(20)
         .optional();
-      validateInput(locationSchema, location, "locationError", "location");
+      validateInput(
+        locationSchema,
+        formData.location[0],
+        "locationError",
+        "location"
+      );
     }
-    if (maxWeeklyPrice) {
+    if (formData.maxWeeklyPrice[0]) {
       const priceSchema = z.coerce
         .number({ message: "Price value should be a number." })
         .positive()
         .optional();
 
-      validateInput(priceSchema, maxWeeklyPrice, "priceError", "price");
+      validateInput(
+        priceSchema,
+        formData.maxWeeklyPrice[0],
+        "priceError",
+        "price"
+      );
     }
-    if (startDate) {
+    if (formData.startDate[0]) {
       const dateSchema = z.coerce.date().refine((data) => data > new Date(), {
         message: "The start date cannot be in the past.",
       });
-      validateInput(dateSchema, startDate, "startDateError", "startDate");
+      validateInput(
+        dateSchema,
+        formData.startDate[0],
+        "startDateError",
+        "startDate"
+      );
     }
-    if (endDate) {
+    if (formData.endDate[0]) {
       const startingDate =
-        startDate.length > 2 ? new Date(startDate) : new Date();
+        formData.startDate.length > 0
+          ? new Date(formData.startDate[0])
+          : new Date();
       const dateSchema = z.coerce.date().refine((data) => data > startingDate, {
         message: "The end date cannot be before the start date.",
       });
-      validateInput(dateSchema, endDate, "endDateError", "endDate");
+      validateInput(dateSchema, formData.endDate[0], "endDateError", "endDate");
     }
-  }, [location, maxWeeklyPrice, startDate, endDate]);
+  }, [formData]);
 
   function handleInputChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    setter: (value: string) => void
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+    inputName: string
   ) {
-    setter(event.target.value);
+    setFormData((prevData) => ({
+      ...prevData,
+      [inputName]: [event.target.value],
+    }));
   }
 
   const handleSubmit = () => {
@@ -117,7 +123,6 @@ export default function FilterForm() {
       let newQuery = filtersArray?.map(
         (filter) => `${filter.key}=${filter.value}&`
       );
-      // newQuery[newQuery.length - 1].slice(0, -2);
       setFiltersQuery(
         `/apartments?${newQuery.toString().replaceAll(",", "").slice(0, -1)}`
       );
@@ -148,8 +153,8 @@ export default function FilterForm() {
           name="location"
           id="location"
           title="location"
-          value={location && location}
-          onChange={(event) => setLocation(event?.target?.value)}
+          value={formData.location && formData.location}
+          onChange={(event) => handleInputChange(event, "location")}
         >
           {mockLocationOptions.map((option) => (
             <option key={crypto.randomUUID()} value={option}>
@@ -166,27 +171,24 @@ export default function FilterForm() {
         label={"Max price per week"}
         type={"text"}
         errorText={errors.priceError}
-        state={maxWeeklyPrice}
-        stateSetter={setMaxWeeklyPrice}
-        handleChange={handleInputChange}
+        stateValue={formData.maxWeeklyPrice}
+        handleChange={(event) => handleInputChange(event, "maxWeeklyPrice")}
       />
       <CustomInput
         nameAndId={"startDate"}
         type="date"
         label={"Available from date:"}
         errorText={errors.startDateError}
-        state={startDate}
-        stateSetter={setStartDate}
-        handleChange={handleInputChange}
+        stateValue={formData.startDate}
+        handleChange={(event) => handleInputChange(event, "startDate")}
       />
       <CustomInput
-        nameAndId={"startDate"}
+        nameAndId={"endDate"}
         type="date"
-        label={"Available from date:"}
+        label={"Available to date:"}
         errorText={errors.endDateError}
-        state={endDate}
-        stateSetter={setEndDate}
-        handleChange={handleInputChange}
+        stateValue={formData.endDate}
+        handleChange={(event) => handleInputChange(event, "endDate")}
       />
       <button
         type="submit"
