@@ -20,10 +20,10 @@ export default function FilterForm() {
     { key: string; value: string }[]
   >([]);
   const [errors, setErrors] = useState({
-    locationError: "",
-    priceError: "",
-    startDateError: "",
-    endDateError: "",
+    locationError: [],
+    priceError: [],
+    startDateError: [],
+    endDateError: [],
   });
 
   function validateInput(
@@ -36,10 +36,12 @@ export default function FilterForm() {
     if (!isValid.success) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [errorName]: isValid.error.errors[0].message,
+        [errorName]: isValid.error.errors.map(
+          (error: { message: string }) => error.message
+        ),
       }));
     } else {
-      setErrors((prevErrors) => ({ ...prevErrors, [errorName]: "" }));
+      setErrors((prevErrors) => ({ ...prevErrors, [errorName]: [] }));
       setFiltersArray((prevArray) => {
         const existingIndex = prevArray.findIndex(
           (filter) => filter.key === queryName
@@ -119,7 +121,6 @@ export default function FilterForm() {
 
   const handleSubmit = () => {
     if (filtersArray.length > 0) {
-      console.log(filtersArray);
       let newQuery = filtersArray?.map(
         (filter) => `${filter.key}=${filter.value}&`
       );
@@ -170,7 +171,7 @@ export default function FilterForm() {
         nameAndId={"priceFilter"}
         label={"Max price per week"}
         type={"text"}
-        errorText={errors.priceError}
+        errorArray={errors.priceError}
         stateValue={formData.maxWeeklyPrice}
         handleChange={(event) => handleInputChange(event, "maxWeeklyPrice")}
       />
@@ -178,7 +179,7 @@ export default function FilterForm() {
         nameAndId={"startDate"}
         type="date"
         label={"Available from date:"}
-        errorText={errors.startDateError}
+        errorArray={errors.startDateError}
         stateValue={formData.startDate}
         handleChange={(event) => handleInputChange(event, "startDate")}
       />
@@ -186,7 +187,7 @@ export default function FilterForm() {
         nameAndId={"endDate"}
         type="date"
         label={"Available to date:"}
-        errorText={errors.endDateError}
+        errorArray={errors.endDateError}
         stateValue={formData.endDate}
         handleChange={(event) => handleInputChange(event, "endDate")}
       />
@@ -194,10 +195,10 @@ export default function FilterForm() {
         type="submit"
         className={styles.btn}
         disabled={
-          errors.endDateError.length > 2 ||
-          errors.locationError.length > 2 ||
-          errors.priceError.length > 2 ||
-          errors.startDateError.length > 2
+          errors.endDateError.length > 0 ||
+          errors.locationError.length > 0 ||
+          errors.priceError.length > 0 ||
+          errors.startDateError.length > 0
         }
       >
         Apply filters

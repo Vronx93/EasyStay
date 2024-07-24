@@ -9,7 +9,7 @@ interface CustomInputInterface {
   type?: string;
   textarea?: boolean;
   textareaStyles?: string;
-  errorText?: string;
+  errorArray?: string[];
   stateValue: string;
   handleChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -22,10 +22,24 @@ export default function CustomInput({
   type,
   textarea,
   textareaStyles,
-  errorText,
+  errorArray,
   stateValue,
   handleChange,
 }: CustomInputInterface) {
+  const removeRepeatMessage = () => {
+    let newArray: string[] = [];
+    if (errorArray) {
+      for (const message of errorArray) {
+        if (!newArray.includes(message)) {
+          console.log(message);
+          newArray.push(message);
+        }
+      }
+    }
+    return newArray;
+  };
+  const filteredErrorArray = removeRepeatMessage();
+
   return (
     <div className={styles.container}>
       <label className={styles.label} htmlFor={nameAndId}>
@@ -53,9 +67,15 @@ export default function CustomInput({
           }
         />
       )}
-      {errorText && errorText?.length > 2 && (
-        <p className={styles.error}>{errorText}</p>
-      )}
+      <ul className={styles.errorList}>
+        {errorArray &&
+          filteredErrorArray.length > 0 &&
+          filteredErrorArray.map((error) => (
+            <li key={crypto.randomUUID()}>
+              <p className={styles.error}>{error}</p>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }

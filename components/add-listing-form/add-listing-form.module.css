@@ -21,3 +21,16 @@
 .red {
   color: var(--red);
 }
+
+.uploadedImagesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+}
+
+.uploadedImagesList li {
+  align-items: center;
+  justify-content: center;
+}

@@ -1,10 +1,15 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import CustomInput from "../custom-input/custom-input";
 import ImageInput from "../image-input/image-input";
 import styles from "./add-listing-form.module.css";
-import { z, ZodString } from "zod";
+import { z } from "zod";
+import {
+  CldImage,
+  CldUploadWidget,
+  CloudinaryUploadWidgetInfo,
+} from "next-cloudinary";
 
 // thumbnailImage: string | StaticImageData;
 // title: string;
@@ -45,6 +50,7 @@ const FormDataSchema = z.object({
     .positive(),
   images: z
     .string()
+    .url()
     .array()
     .nonempty()
     .max(20, { message: "You can add up to 20 pictures." }),
@@ -60,17 +66,17 @@ export default function AddListingForm() {
     description: "",
     location: "",
     weeklyPrice: "",
-    images: [],
+    images: [] as string[],
   });
 
   const [errors, setErrors] = useState({
-    primaryImage: "",
-    title: "",
-    shortDescription: "",
-    description: "",
-    location: "",
-    weeklyPrice: "",
-    images: "",
+    primaryImage: [],
+    title: [],
+    shortDescription: [],
+    description: [],
+    location: [],
+    weeklyPrice: [],
+    images: [],
   });
 
   function validateInput(schema: any, input: unknown, fieldName: string) {
@@ -79,11 +85,17 @@ export default function AddListingForm() {
       console.log(isValid.error.errors);
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [fieldName]: isValid.error.errors[0].message,
+        [fieldName]: isValid.error.errors.map(
+          (error: { message: string }) => error.message
+        ),
       }));
     } else {
-      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: "" }));
+      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: [] }));
       //   add here logic for create apartment listing
+    }
+    if (typeof input === "string" && input.length < 2) {
+      console.log("string", input.length);
+      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: [] }));
     }
   }
 
@@ -108,13 +120,44 @@ export default function AddListingForm() {
         <h1>Add Listing</h1>
       </header>
       {/* multiple img input */}
-      <ImageInput />
+      <ul className={styles.uploadedImagesList}>
+        {formData.images.map((image) => (
+          <li>
+            <CldImage
+              alt={""}
+              src={image}
+              width={300}
+              height={200}
+              crop={"fill"}
+              key={crypto.randomUUID()}
+            />
+          </li>
+        ))}
+      </ul>
+      <CldUploadWidget
+        uploadPreset="EasyStayListingImages"
+        signatureEndpoint={`/api/cloudinary`}
+        onSuccess={(result) => {
+          setFormData((prevData) => ({
+            ...prevData,
+            images: [...prevData.images, result.info?.secure_url],
+          }));
+        }}
+      >
+        {({ open }) => {
+          return (
+            <button type="button" onClick={() => open()}>
+              Upload an Image
+            </button>
+          );
+        }}
+      </CldUploadWidget>
       <CustomInput
         nameAndId="title"
         label="Title"
         stateValue={formData.title}
         handleChange={(event) => handleChange(event, "title")}
-        errorText={errors.title}
+        errorArray={errors.title}
       />
       <CustomInput
         textarea
@@ -122,7 +165,7 @@ export default function AddListingForm() {
         label="Short description"
         stateValue={formData.shortDescription}
         handleChange={(event) => handleChange(event, "shortDescription")}
-        errorText={errors.shortDescription}
+        errorArray={errors.shortDescription}
       />
       <CustomInput
         textarea
@@ -131,21 +174,21 @@ export default function AddListingForm() {
         label={"Description"}
         stateValue={formData.description}
         handleChange={(event) => handleChange(event, "description")}
-        errorText={errors.description}
+        errorArray={errors.description}
       />
       <CustomInput
         nameAndId="location"
         label="Location"
         stateValue={formData.location}
         handleChange={(event) => handleChange(event, "location")}
-        errorText={errors.location}
+        errorArray={errors.location}
       />
       <CustomInput
         nameAndId="weeklyPrice"
         label="Price per week"
         stateValue={formData.weeklyPrice}
         handleChange={(event) => handleChange(event, "weeklyPrice")}
-        errorText={errors.weeklyPrice}
+        errorArray={errors.weeklyPrice}
       />
       <button type="submit" className={styles.btn}>
         Add Listing
